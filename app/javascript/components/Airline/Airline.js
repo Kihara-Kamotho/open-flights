@@ -1,6 +1,8 @@
-import React,{useState, useEffect} from 'react' 
+import React,{useState, useEffect, Fragment} from 'react' 
 import axios from 'axios'
 import Header from './Header'
+import ReviewForm from './ReviewForm'
+
 import styled from 'styled-components'
 
 const Wrapper = styled.div`
@@ -46,22 +48,38 @@ const Airline = (props) => {
 
   }, [])
 
+  const handleChange = (e) => {
+    e.preventDefault
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault
+  }
+
   return(
-    <Wrapper>
-      <Column>
-        <Main>
-          { loaded && 
-            <Header 
-            attributes={airline.data.attributes}
-            reviews={airline.included}/>
-          }
-          <div className="reviews"></div>
-        </Main>
-      </Column>
-      <Column>
-        <div className="review-form">review form goes here</div>
-      </Column>
-    </Wrapper>
+      <Wrapper>
+        { 
+          loaded && 
+          <Fragment>
+            <Column>
+              <Main>
+                  <Header 
+                  attributes={airline.data.attributes}
+                  reviews={airline.included}/>
+                <div className="reviews"></div>
+              </Main>
+            </Column>
+            <Column>
+              <ReviewForm 
+                handleChange={handleChange}
+                handleSubmit={handleSubmit}
+                attributes={airline.data.attributes}
+                review={review}
+              />
+            </Column>
+          </Fragment>
+        }
+      </Wrapper>
   )
 }
 

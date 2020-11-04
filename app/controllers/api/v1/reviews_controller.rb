@@ -20,6 +20,9 @@ module Api
       end
 
       private 
+      def airline 
+        @airline = Airline.find(params[:airline_id])
+      end
       def review_params 
         params.require(:review).permit(:title, :description, :score, :airline_id)
       end
